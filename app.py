@@ -36,8 +36,15 @@ def guessing_game():
         guess_limit1 = int(input("Enter the number of guesses you want: "))
         out_of_gusses1 = False
 
-        print("")
-        print("Guessing Game! You have " + str(guess_limit1) + " tries to guess the word!")
+        if guess_limit1 == 1:
+            print("")
+            print("Guessing Game! You have " + str(guess_limit1) + " try to guess the number you rolled!")
+
+
+        else:
+            print("")
+            print("Guessing Game! You have " + str(guess_limit1) + " tries to guess the number you rolled!")
+
 
         while guess1 != secret_word1 and not (out_of_gusses1):
             if guess_count1 < guess_limit1:
@@ -59,8 +66,15 @@ def guessing_game():
         guess_limit = int(input("Enter the number of guesses you want: "))
         out_of_gusses = False
 
-        print("")
-        print("Guessing Game! You have " + str(guess_limit) + " tries to guess the word!")
+        if guess_limit == 1:
+            print("")
+            print("Guessing Game! You have " + str(guess_limit) + " try to guess the number you rolled!")
+
+
+        else:
+            print("")
+            print("Guessing Game! You have " + str(guess_limit) + " tries to guess the number you rolled!")
+
 
         while guess != secret_word and not (out_of_gusses):
             if guess_count < guess_limit:
