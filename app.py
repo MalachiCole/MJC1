@@ -432,14 +432,29 @@ def age():
     print("%s's age is %d years or " % (name_player, year), end="")
     print("%d months or %d days" % (month, day))
 
+def leap():
+    print("Welcome to the Leap Year Tester, " + name_player + "!")
+    year = int(input("Enter a year:- "))  # Here, you take the input from the user
+
+    if (((year % 4 == 0) and (year % 100 != 0)) or (year % 400 == 0)):
+        """
+        if a year is a multiple of four and a multiple of 100 i.e. if it is a multiple of 400 it is not a leap year
+        """
+        print("{0} is a leap year!!".format(year))
+        """
+        printing the output
+        """
+    else:
+        print("{0} is not a leap year!!".format(year))
+
 
 print("")
 print("Welcome to the menu, " + name_player + "!")
 
 menu = 0
+exit_num = 12
 
-
-while menu != 11:
+while menu != int(exit_num):
     print("")
     print("Options:")
     print("1: Calculator")
@@ -452,7 +467,8 @@ while menu != 11:
     print("8: Swap Cases")
     print("9: Caesar Cypher")
     print("10: Age")
-    print("11: Exit")
+    print("11: Leap Year Tester")
+    print(str(exit_num) + ": Exit")
     print("")
     menu = int(input("What would you like to do? Enter the number: "))
     print("")
@@ -478,6 +494,8 @@ while menu != 11:
         case 10:
             age()
         case 11:
+            leap()
+        case int(exit_num):
             exit()
         case _:
             error()
