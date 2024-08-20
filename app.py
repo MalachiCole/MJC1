@@ -1,4 +1,4 @@
-## This is a comment
+# This is a comment
 def calculator():
 
     print("Calculator")
@@ -38,12 +38,12 @@ def guessing_game():
 
         if guess_limit1 == 1:
             print("")
-            print("Guessing Game! You have " + str(guess_limit1) + " try to guess the number you rolled!")
+            print("Guessing Game! You have " + str(guess_limit1) + " try to guess the word!")
 
 
         else:
             print("")
-            print("Guessing Game! You have " + str(guess_limit1) + " tries to guess the number you rolled!")
+            print("Guessing Game! You have " + str(guess_limit1) + " tries to guess the word")
 
 
         while guess1 != secret_word1 and not (out_of_gusses1):
@@ -170,8 +170,6 @@ def dice_game():
     die_side_num2 = int(input("Enter the number of sides you want on your second die: "))
 
 
-    def roll_dice(num):
-        return random.randint(1, num)
 
 
     print("")
