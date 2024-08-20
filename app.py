@@ -446,13 +446,49 @@ def leap():
         """
     else:
         print("{0} is not a leap year!!".format(year))
+def tictactoe():
+    print("Welcome to Tic Tac Toe, " + name_player + "! This is a 2 player game, so find a friend!")
+    squares = [' '] * 9
+    players = 'XO'
+    board = '''
+      0   1   2
+      {0} | {1} | {2}
+     -----------
+    3 {3} | {4} | {5} 5
+     -----------
+      {6} | {7} | {8}
+      6   7   8
+    '''
+    win_conditions = [
+        (0, 1, 2), (3, 4, 5), (6, 7, 8),  # horizontals
+        (0, 3, 6), (1, 4, 7), (2, 5, 8),  # verticals
+        (0, 4, 8), (2, 4, 6)  # diagonals
+    ]
 
+    def check_win(player):
+        for a, b, c in win_conditions:
+            if {squares[a], squares[b], squares[c]} == {player}:
+                return True
+
+    while True:
+        print(board.format(*squares))
+        if check_win(players[1]):
+            print(f'{players[1]} is the winner!')
+            break
+        if ' ' not in squares:
+            print('Cats game!')
+            break
+        move = input(f'{players[0]} to move [0-8] > ')
+        if not move.isdigit() or not 0 <= int(move) <= 8 or squares[int(move)] != ' ':
+            print('Invalid move!')
+            continue
+        squares[int(move)], players = players[0], players[::-1]
 
 print("")
 print("Welcome to the menu, " + name_player + "!")
 
 menu = 0
-exit_num = 12
+exit_num = 13
 
 while menu != int(exit_num):
     print("")
@@ -468,6 +504,7 @@ while menu != int(exit_num):
     print("9: Caesar Cypher")
     print("10: Age")
     print("11: Leap Year Tester")
+    print("12: Tic Tac Toe")
     print(str(exit_num) + ": Exit")
     print("")
     menu = int(input("What would you like to do? Enter the number: "))
@@ -495,6 +532,8 @@ while menu != int(exit_num):
             age()
         case 11:
             leap()
+        case 12:
+            tictactoe()
         case int(exit_num):
             exit()
         case _:
