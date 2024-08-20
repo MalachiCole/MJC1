@@ -519,11 +519,30 @@ def tictactoe():
             continue
         squares[int(move)], players = players[0], players[::-1]
 
+def oob():
+    print("Welcome to OOB, " + name_player + "!")
+    upper_letter = ("Oob")
+    lower_letter = ("oob")
+
+    def translate(phrase):
+        translation = ""
+        for letter in phrase:
+            if letter in "aeiou":
+                translation = translation + lower_letter
+            elif letter in "AEIOU":
+                translation = translation + upper_letter
+            else:
+                translation = translation + letter
+        return translation
+
+    print(translate(input("Enter a phrase: ")))
+
+
 print("")
 print("Welcome to the menu, " + name_player + "!")
 
 menu = 0
-exit_num = 13
+exit_num = 14
 
 while menu != int(exit_num):
     print("")
@@ -540,6 +559,7 @@ while menu != int(exit_num):
     print("10: Age")
     print("11: Leap Year Tester")
     print("12: Tic Tac Toe")
+    print("13: OOB")
     print(str(exit_num) + ": Exit")
     print("")
     menu = int(input("What would you like to do? Enter the number: "))
@@ -569,6 +589,8 @@ while menu != int(exit_num):
             leap()
         case 12:
             tictactoe()
+        case 13:
+            oob()
         case int(exit_num):
             exit()
         case _:
