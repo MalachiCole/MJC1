@@ -376,11 +376,60 @@ def error():
 def exit():
     print("Exited")
 
+def age():
+    # -*- coding: utf-8 -*-
+    import time
+    from calendar import isleap
+
+    # judge the leap year
+    def judge_leap_year(year):
+        if isleap(year):
+            return True
+        else:
+            return False
+
+    # returns the number of days in each month
+    def month_days(month, leap_year):
+        if month in [1, 3, 5, 7, 8, 10, 12]:
+            return 31
+        elif month in [4, 6, 9, 11]:
+            return 30
+        elif month == 2 and leap_year:
+            return 29
+        elif month == 2 and (not leap_year):
+            return 28
+
+    name = input("Input your name: ")
+    age = input("Input your age: ")
+    localtime = time.localtime(time.time())
+
+    year = int(age)
+    month = year * 12 + localtime.tm_mon
+    day = 0
+
+    begin_year = int(localtime.tm_year) - year
+    end_year = begin_year + year
+
+    # calculate the days
+    for y in range(begin_year, end_year):
+        if (judge_leap_year(y)):
+            day = day + 366
+        else:
+            day = day + 365
+
+    leap_year = judge_leap_year(localtime.tm_year)
+    for m in range(1, localtime.tm_mon):
+        day = day + month_days(m, leap_year)
+
+    day = day + localtime.tm_mday
+    print("%s's age is %d years or " % (name, year), end="")
+    print("%d months or %d days" % (month, day))
+
 
 menu = 0
 
 
-while menu != 10:
+while menu != 11:
     print("")
     print("Options:")
     print("1: Calculator")
@@ -392,7 +441,8 @@ while menu != 10:
     print("7: Translator")
     print("8: Swap Cases")
     print("9: Caesar Cypher")
-    print("10: Exit")
+    print("10: Age")
+    print("11: Exit")
     print("")
     menu = int(input("What would you like to do? Enter the number: "))
     print("")
@@ -416,6 +466,8 @@ while menu != 10:
         case 9:
             cypher()
         case 10:
+            age()
+        case 11:
             exit()
         case _:
             error()
