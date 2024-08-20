@@ -1,7 +1,10 @@
 # This is a comment
+
+name_player = input("Enter Your Name: ")
+
 def calculator():
 
-    print("Calculator")
+    print("Welcome to the Calculator, " + name_player + "!")
 
     num1 = float(input("Enter first number: "))
     op = input("Enter operator(+-*/): ")
@@ -29,6 +32,7 @@ def calculator():
 
 
 def guessing_game():
+    print("Welcome to the guessing game, " + name_player + "!")
     def pre_set():
         secret_word1 = "Minecraft"
 
@@ -100,7 +104,7 @@ def guessing_game():
         print("Error: Invalid Option")
 def guess_die():
     import random
-
+    print("Welcome to Guess the Number on the Die, " + name_player + "!")
     die_side_num = int(input("Enter the number of sides you want on your die: "))
 
 
@@ -137,7 +141,7 @@ def guess_die():
     else:
         print("You Win! The number was: " + secret_num)
 def mad_lib():
-    print("Mad Lib")
+    print("Welcome to the Mad Lib, " + name_player + "!")
 
     place1 = input("Enter a place: ")
     plural_noun1 = input("Enter a plural noun: ")
@@ -160,7 +164,7 @@ def mad_lib():
 def dice_game():
     import random
 
-    print("Dice Game")
+    print("Welcome to the Dice Game, " + name_player + "!")
 
     # I want to figure out how to make it so that if you enter a 0 or lower or a decimal it will say Error: Invalid Number.
     die_side_num = int(input("Enter the number of sides you want on your die: "))
@@ -183,7 +187,7 @@ def dice_game():
 
 
 def quiz():
-
+    print("Welcome to the Quiz, " + name_player + "!")
     class Question:
         def __init__(self, prompt, answer):
             self.prompt = prompt
@@ -214,6 +218,7 @@ def quiz():
 
     run_test(questions)
 def translator():
+    print("Welcome to the Translator, " + name_player + "!")
     print("What letter would you like your translator to be based on? Enter the upper and lower case versions of it.")
     upper_letter = input("Uppercase: ")
     lower_letter = input("Lowercase: ")
@@ -234,6 +239,7 @@ def translator():
     print(translate(input("Enter a phrase: ")))
 
 def swap_cases():
+    print("Welcome to Swap Cases, " + name_player + "!")
     def swap_case(s):
         translation = ""
 
@@ -252,7 +258,7 @@ def swap_cases():
         result = swap_case(s)
         print(result)
 def cypher():
-    print("Caesar Cypher")
+    print("Welcome to the Caesar Cypher, " + name_player + "!")
 
     def translate(s):
         translation = ""
@@ -374,9 +380,10 @@ def error():
     print("Error: Invalid Number")
 
 def exit():
-    print("Exited")
+    print(name_player + " has left. Hope to see you here again soon!")
 
 def age():
+    print("Welcome to the Age Calculator, " + name_player + "!")
     # -*- coding: utf-8 -*-
     import time
     from calendar import isleap
@@ -399,7 +406,7 @@ def age():
         elif month == 2 and (not leap_year):
             return 28
 
-    name = input("Input your name: ")
+
     age = input("Input your age: ")
     localtime = time.localtime(time.time())
 
@@ -422,9 +429,12 @@ def age():
         day = day + month_days(m, leap_year)
 
     day = day + localtime.tm_mday
-    print("%s's age is %d years or " % (name, year), end="")
+    print("%s's age is %d years or " % (name_player, year), end="")
     print("%d months or %d days" % (month, day))
 
+
+print("")
+print("Welcome to the menu, " + name_player + "!")
 
 menu = 0
 
