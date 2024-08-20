@@ -19,6 +19,7 @@ def calculator():
     elif op == "*":
         print(num1 * num2)
     elif op == "/":
+        # I want to figure out how to make it so that if you enter a letter it will say Error: Invalid Number.
         if num2 == 0 and op == "/":
             print("r u dum? U cant do dat")
         else:
@@ -113,6 +114,7 @@ def guess_die():
     guess_limit = int(input("Enter the number of guesses you want: "))
     out_of_gusses = False
 
+#I want to figure out how to make it so that if you enter a 0 or lower or a decimal it will say Error: Invalid Number.
     if guess_limit == 1:
         print("")
         print("Guessing Game! You have " + str(guess_limit) + " try to guess the number you rolled!")
@@ -160,13 +162,14 @@ def dice_game():
 
     print("Dice Game")
 
+    # I want to figure out how to make it so that if you enter a 0 or lower or a decimal it will say Error: Invalid Number.
     die_side_num = int(input("Enter the number of sides you want on your die: "))
 
 
     def roll_dice(num):
         return random.randint(1, num)
 
-
+    # I want to figure out how to make it so that if you enter a 0 or lower or a decimal it will say Error: Invalid Number.
     die_side_num2 = int(input("Enter the number of sides you want on your second die: "))
 
 
