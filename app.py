@@ -483,8 +483,9 @@ def leap():
         print("{0} is not a leap year!!".format(year))
 def tictactoe():
     print("Welcome to Tic Tac Toe, " + name_player + "! This is a 2 player game, so find a friend!")
+
     squares = [' '] * 9
-    players = 'XO'
+    players = input('Enter the 2 player letters or numbers, example; XO: ')
     board = '''
       0   1   2
       {0} | {1} | {2}
@@ -518,6 +519,7 @@ def tictactoe():
             print('Invalid move!')
             continue
         squares[int(move)], players = players[0], players[::-1]
+
 
 def oob():
     print("Welcome to OOB, " + name_player + "!")
