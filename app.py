@@ -512,7 +512,7 @@ def tictactoe():
             print(f'{players[1]} is the winner!')
             break
         if ' ' not in squares:
-            print('Cats game!')
+            print('Draw!')
             break
         move = input(f'{players[0]} to move [0-8] > ')
         if not move.isdigit() or not 0 <= int(move) <= 8 or squares[int(move)] != ' ':
