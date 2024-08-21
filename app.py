@@ -253,13 +253,23 @@ def quiz():
 
     run_test(questions)
 def translator():
-    print("Welcome to the Translator, " + name_player + "!")
+    print("Welcome to Translator, " + name_player + "!")
     print("What letter would you like your translator to be based on? Enter the upper and lower case versions of it.")
     upper_letter = input("Uppercase: ")
     lower_letter = input("Lowercase: ")
 
+    def is_y(phrase):
+        translation = ""
+        for letter in phrase:
+            if letter in "aeiouy":
+                translation = translation + lower_letter
+            elif letter in "AEIOUY":
+                translation = translation + upper_letter
+            else:
+                translation = translation + letter
+        return translation
 
-    def translate(phrase):
+    def no_y(phrase):
         translation = ""
         for letter in phrase:
             if letter in "aeiou":
@@ -270,8 +280,13 @@ def translator():
                 translation = translation + letter
         return translation
 
+    y_or_no = input("Would you like to inclued y as a vowel? Type Y or N: ")
 
-    print(translate(input("Enter a phrase: ")))
+    if y_or_no == "Y":
+        print(is_y(input("Enter a phrase: ")))
+    if y_or_no == "N":
+        print(no_y(input("Enter a phrase: ")))
+
 
 def swap_cases():
     print("Welcome to Swap Cases, " + name_player + "!")
@@ -526,7 +541,18 @@ def oob():
     upper_letter = ("Oob")
     lower_letter = ("oob")
 
-    def translate(phrase):
+    def is_y(phrase):
+        translation = ""
+        for letter in phrase:
+            if letter in "aeiouy":
+                translation = translation + lower_letter
+            elif letter in "AEIOUY":
+                translation = translation + upper_letter
+            else:
+                translation = translation + letter
+        return translation
+
+    def no_y(phrase):
         translation = ""
         for letter in phrase:
             if letter in "aeiou":
@@ -537,7 +563,12 @@ def oob():
                 translation = translation + letter
         return translation
 
-    print(translate(input("Enter a phrase: ")))
+    y_or_no = input("Would you like to inclued y as a vowel? Type Y or N: ")
+
+    if y_or_no == "Y":
+        print(is_y(input("Enter a phrase: ")))
+    if y_or_no == "N":
+        print(no_y(input("Enter a phrase: ")))
 
 
 print("")
