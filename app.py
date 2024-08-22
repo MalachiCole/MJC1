@@ -6,6 +6,7 @@ exit_num = 14
 
 def error():
     print("Error: Invalid Number")
+    print("Default Procedure: Exit to Menu")
 
 def exit():
     print(name_player + " has left. Hope to see you here again soon!")
@@ -593,7 +594,7 @@ def cypher():
             result = translate(s)
             print("")
             print("Translation: " + result)
-            
+
         print("")
         print("Options")
         print("1: Play Again")
@@ -609,7 +610,7 @@ def cypher():
             print("Default Procedure: Exit to Menu")
             cypher1 = 1
 
-    
+
 
 
 def age():
@@ -835,7 +836,7 @@ def oob():
 print("")
 print("Welcome to the menu, " + name_player + "!")
 
-while menu != int(exit_num):
+while menu != exit_num:
     print("")
     print("Options:")
     print("1: Calculator")
@@ -853,36 +854,36 @@ while menu != int(exit_num):
     print("13: OOB")
     print(str(exit_num) + ": Exit")
     print("")
-    menu = int(input("What would you like to do? Enter the number: "))
+    menu = input("What would you like to do? Enter the number: ")
     print("")
     match menu:
-        case 1:
+        case "1":
             calculator()
-        case 2:
+        case "2":
             guessing_game()
-        case 3:
+        case "3":
             guess_die()
-        case 4:
+        case "4":
             mad_lib()
-        case 5:
+        case "5":
             dice_game()
-        case 6:
+        case "6":
             quiz()
-        case 7:
+        case "7":
             translator()
-        case 8:
+        case "8":
             swap_cases()
-        case 9:
+        case "9":
             cypher()
-        case 10:
+        case "10":
             age()
-        case 11:
+        case "11":
             leap()
-        case 12:
+        case "12":
             tictactoe()
-        case 13:
+        case "13":
             oob()
-        case int(exit_num):
+        case str(exit_num):
             exit()
         case _:
             error()
