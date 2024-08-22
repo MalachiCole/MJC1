@@ -5,7 +5,7 @@ menu = 0
 exit_num = 14
 
 def error():
-    print("Error: Invalid Number")
+    print("Error: Invalid Input")
     print("Default Procedure: Exit to Menu")
 
 def exit():
@@ -886,6 +886,7 @@ while menu != exit_num:
         oob()
     elif menu == str(exit_num):
         exit()
+        menu = exit_num
     else:
         error()
 
