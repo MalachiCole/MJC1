@@ -888,10 +888,4 @@ while menu != exit_num:
         exit()
         menu = exit_num
     else:
-<<<<<<< HEAD
         error()
-=======
-        error()
-
-
->>>>>>> 92c9bd400162c84498e6cd056db76ae271f88fe8
