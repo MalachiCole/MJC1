@@ -856,36 +856,37 @@ while menu != exit_num:
     print("")
     menu = input("What would you like to do? Enter the number: ")
     print("")
-    match menu:
-        case "1":
-            calculator()
-        case "2":
-            guessing_game()
-        case "3":
-            guess_die()
-        case "4":
-            mad_lib()
-        case "5":
-            dice_game()
-        case "6":
-            quiz()
-        case "7":
-            translator()
-        case "8":
-            swap_cases()
-        case "9":
-            cypher()
-        case "10":
-            age()
-        case "11":
-            leap()
-        case "12":
-            tictactoe()
-        case "13":
-            oob()
-        case str(exit_num):
-            exit()
-        case _:
-            error()
+    if menu == "1":
+        calculator()
+    elif menu == "1":
+        calculator()
+    elif menu == "2":
+        guessing_game()
+    elif menu == "3":
+        guess_die()
+    elif menu == "4":
+        mad_lib()
+    elif menu == "5":
+        dice_game()
+    elif menu == "6":
+        quiz()
+    elif menu == "7":
+        translator()
+    elif menu == "8":
+        swap_cases()
+    elif menu == "9":
+        cypher()
+    elif menu == "10":
+        age()
+    elif menu == "11":
+        leap()
+    elif menu == "12":
+        tictactoe()
+    elif menu == "13":
+        oob()
+    elif menu == str(exit_num):
+        exit()
+    else:
+        error()
 
 
