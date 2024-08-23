@@ -776,16 +776,14 @@ def oob():
     while oob1 != 1:
         print("")
         print("Welcome to OOB, " + name_player + "!")
-        upper_letter = ("Oob")
-        lower_letter = ("oob")
 
         def is_y(phrase):
             translation = ""
             for letter in phrase:
                 if letter in "aeiouy":
-                    translation = translation + lower_letter
+                    translation = translation + "oob"
                 elif letter in "AEIOUY":
-                    translation = translation + upper_letter
+                    translation = translation + "Oob"
                 else:
                     translation = translation + letter
             return translation
@@ -794,9 +792,9 @@ def oob():
             translation = ""
             for letter in phrase:
                 if letter in "aeiou":
-                    translation = translation + lower_letter
+                    translation = translation + "oob"
                 elif letter in "AEIOU":
-                    translation = translation + upper_letter
+                    translation = translation + "Oob"
                 else:
                     translation = translation + letter
             return translation
