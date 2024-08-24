@@ -2,7 +2,7 @@
 
 name_player = input("Enter Your Name: ")
 menu = 0
-exit_num = 14
+exit_num = 15
 
 def error():
     print("Error: Invalid Input")
@@ -830,6 +830,95 @@ def oob():
             print("Default Procedure: Exit to Menu")
             oob1 = 1
 
+def morse_code():
+    morse_code1 = 0
+    while morse_code1 != 1:
+        print("")
+        print("Welcome to the Morse Code Converter, " + name_player + "!")
+
+        # all_the symbols
+        symbols = {
+            "a": ".- ",
+            "b": "-... ",
+            "c": "-.-. ",
+            "d": "-.. ",
+            "e": ". ",
+            "f": "..-. ",
+            "g": ".- ",
+            "h": ".... ",
+            "i": ".. ",
+            "j": ".--- ",
+            "k": "-.- ",
+            "l": ".-.. ",
+            "m": "-- ",
+            "n": "-. ",
+            "o": "--- ",
+            "p": ".--. ",
+            "q": "--.- ",
+            "r": ".-. ",
+            "s": "... ",
+            "t": "- ",
+            "u": "..- ",
+            "v": "...- ",
+            "w": ".-- ",
+            "x": "-..- ",
+            "y": "-.-- ",
+            "z": "--.. ",
+            "A": ".- ",
+            "B": "-... ",
+            "C": "-.-. ",
+            "D": "-.. ",
+            "E": ". ",
+            "F": "..-. ",
+            "G": ".- ",
+            "H": ".... ",
+            "I": ".. ",
+            "J": ".--- ",
+            "K": "-.- ",
+            "L": ".-.. ",
+            "M": "-- ",
+            "N": "-. ",
+            "O": "--- ",
+            "P": ".--. ",
+            "Q": "--.- ",
+            "R": ".-. ",
+            "S": "... ",
+            "T": "- ",
+            "U": "..- ",
+            "V": "...- ",
+            "W": ".-- ",
+            "X": "-..- ",
+            "Y": "-.-- ",
+            "Z": "--.. ",
+            " ": "  ",
+        }
+
+        # the user has to tyoe a word
+        ask = input("Enter a phrase: ")
+
+        length = len(ask)
+        output = ""
+
+        for i in range(length):
+            if ask[i] in symbols.keys():
+                output = output + " " + symbols.get(ask[i])
+
+        print(output)
+
+        print("")
+        print("Options")
+        print("1: Play Again")
+        print("2: Menu")
+        morse_code_menu = input("What do you want to do? Enter the number: ")
+
+        if morse_code_menu == "1":
+            morse_code1 = 0
+        elif morse_code1 == "2":
+            morse_code1 = 1
+        else:
+            print("Error: Invalid Input")
+            print("Default Procedure: Exit to Menu")
+            morse_code1 = 1
 
 print("")
 print("Welcome to the menu, " + name_player + "!")
@@ -850,6 +939,7 @@ while menu != exit_num:
     print("11: Leap Year Tester")
     print("12: Tic Tac Toe")
     print("13: OOB")
+    print("14: Morse Code")
     print(str(exit_num) + ": Exit")
     print("")
     menu = input("What would you like to do? Enter the number: ")
@@ -882,8 +972,11 @@ while menu != exit_num:
         tictactoe()
     elif menu == "13":
         oob()
+    elif menu == "14":
+        morse_code()
     elif menu == str(exit_num):
         exit()
         menu = exit_num
     else:
         error()
+        
