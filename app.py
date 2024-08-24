@@ -893,7 +893,7 @@ def morse_code():
             " ": "  ",
         }
 
-        # the user has to tyoe a word
+        # the user has to type a word
         ask = input("Enter a phrase: ")
 
         length = len(ask)
