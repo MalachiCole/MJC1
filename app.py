@@ -2,14 +2,17 @@
 
 name_player = input("Enter Your Name: ")
 menu = 0
-exit_num = 15
+exit_num = 16
+
 
 def error():
     print("Error: Invalid Input")
     print("Default Procedure: Exit to Menu")
 
+
 def exit():
     print(name_player + " has left. Hope to see you here again soon!")
+
 
 def calculator():
     calculator1 = 0
@@ -62,6 +65,7 @@ def guessing_game():
     while guess1 != 1:
         print("")
         print("Welcome to the guessing game, " + name_player + "!")
+
         def pre_set():
             secret_word1 = "Minecraft"
 
@@ -78,7 +82,6 @@ def guessing_game():
             else:
                 print("")
                 print("Guessing Game! You have " + str(guess_limit1) + " tries to guess the word")
-
 
             while guess1 != secret_word1 and not (out_of_gusses1):
                 if guess_count1 < guess_limit1:
@@ -144,7 +147,6 @@ def guessing_game():
                 print("")
                 print("Guessing Game! You have " + str(guess_limit) + " tries to guess the word!")
 
-
             while guess != secret_word and not (out_of_gusses):
                 if guess_count < guess_limit:
                     guess = input("Enter guess: ")
@@ -189,6 +191,7 @@ def guessing_game():
             print("Default Procedure: Exit to Menu")
             guess1 = 1
 
+
 def guess_die():
     guess_die1 = 0
     while guess_die1 != 1:
@@ -196,10 +199,8 @@ def guess_die():
         print("Welcome to Guess the Number on the Die, " + name_player + "!")
         die_side_num = int(input("Enter the number of sides you want on your die: "))
 
-
         def roll_dice(num):
             return random.randint(1, num)
-
 
         secret_num = str((roll_dice(die_side_num)))
         guess = ""
@@ -207,7 +208,7 @@ def guess_die():
         guess_limit = int(input("Enter the number of guesses you want: "))
         out_of_gusses = False
 
-    #I want to figure out how to make it so that if you enter a 0 or lower or a decimal it will say Error: Invalid Number.
+        # I want to figure out how to make it so that if you enter a 0 or lower or a decimal it will say Error: Invalid Number.
         if guess_limit == 1:
             print("")
             print("Guessing Game! You have " + str(guess_limit) + " try to guess the number you rolled!")
@@ -244,6 +245,7 @@ def guess_die():
             print("Error: Invalid Input")
             print("Default Procedure: Exit to Menu")
             guess_die1 = 1
+
 
 def mad_lib():
     mad_lib1 = 0
@@ -283,6 +285,7 @@ def mad_lib():
             print("Default Procedure: Exit to Menu")
             mad_lib1 = 1
 
+
 def dice_game():
     dice_game1 = 0
     while dice_game1 != 1:
@@ -292,7 +295,6 @@ def dice_game():
 
         # I want to figure out how to make it so that if you enter a 0 or lower or a decimal it will say Error: Invalid Number.
         die_side_num = int(input("Enter the number of sides you want on your die: "))
-
 
         def roll_dice(num):
             return random.randint(1, num)
@@ -321,16 +323,17 @@ def dice_game():
             print("Default Procedure: Exit to Menu")
             dice_game1 = 1
 
+
 def quiz():
     quiz1 = 0
     while quiz1 != 1:
         print("")
         print("Welcome to the Quiz, " + name_player + "!")
+
         class Question:
             def __init__(self, prompt, answer):
                 self.prompt = prompt
                 self.answer = answer
-
 
         question_prompts = [
             "What is the best video game?\n(a) Fortnite\n(b) Minecraft\n(c) GTA\n(d) MarioKart\n\n",
@@ -343,7 +346,6 @@ def quiz():
             Question(question_prompts[2], "c"),
         ]
 
-
         def run_test(questions):
             score = 0
             for question in questions:
@@ -352,7 +354,6 @@ def quiz():
                 if answer == question.answer:
                     score += 1
             print("You got " + str(score) + "/" + str(len(questions)) + " correct.")
-
 
         run_test(questions)
 
@@ -377,7 +378,8 @@ def translator():
     while translator1 != 1:
         print("")
         print("Welcome to Translator, " + name_player + "!")
-        print("What letter would you like your translator to be based on? Enter the upper and lower case versions of it.")
+        print(
+            "What letter would you like your translator to be based on? Enter the upper and lower case versions of it.")
         upper_letter = input("Uppercase: ")
         lower_letter = input("Lowercase: ")
 
@@ -434,11 +436,13 @@ def translator():
             print("Default Procedure: Exit to Menu")
             translator1 = 1
 
+
 def swap_cases():
     swap_cases1 = 0
     while swap_cases1 != 1:
         print("")
         print("Welcome to Swap Cases, " + name_player + "!")
+
         def swap_case(s):
             translation = ""
 
@@ -450,7 +454,6 @@ def swap_cases():
                 else:
                     translation = translation + letter
             return translation
-
 
         if __name__ == '__main__':
             s = input("Enter a phrase: ")
@@ -471,6 +474,7 @@ def swap_cases():
             print("Error: Invalid Input")
             print("Default Procedure: Exit to Menu")
             swap_cases1 = 1
+
 
 def cypher():
     cypher1 = 0
@@ -611,8 +615,6 @@ def cypher():
             cypher1 = 1
 
 
-
-
 def age():
     age1 = 0
     while age1 != 1:
@@ -639,7 +641,6 @@ def age():
                 return 29
             elif month == 2 and (not leap_year):
                 return 28
-
 
         age = input("Input your age: ")
         localtime = time.localtime(time.time())
@@ -681,6 +682,7 @@ def age():
             print("Default Procedure: Exit to Menu")
             age1 = 1
 
+
 def leap():
     leap1 = 0
     while leap1 != 1:
@@ -713,6 +715,7 @@ def leap():
             print("Error: Invalid Input")
             print("Default Procedure: Exit to Menu")
             leap1 = 1
+
 
 def tictactoe():
     tictactoe1 = 0
@@ -770,6 +773,7 @@ def tictactoe():
             print("Error: Invalid Input")
             print("Default Procedure: Exit to Menu")
             tictactoe1 = 1
+
 
 def oob():
     oob1 = 0
@@ -829,6 +833,7 @@ def oob():
             print("Error: Invalid Input")
             print("Default Procedure: Exit to Menu")
             oob1 = 1
+
 
 def morse_code():
     morse_code1 = 0
@@ -920,6 +925,44 @@ def morse_code():
             print("Default Procedure: Exit to Menu")
             morse_code1 = 1
 
+def timer():
+    timer1 = 0
+    while timer1 != 1:
+        print("")
+        print("Welcome to the Timer, " + name_player + "!")
+
+        import time
+
+        def countdown(t):
+            while t:
+                print(t)
+                mins, secs = divmod(t, 60)
+                timer = '{:02d}:{:02d}'.format(mins, secs)
+                print(timer, end="\r")
+                time.sleep(1)
+                t -= 1
+
+            print('Timer completed!')
+
+        t = input('Enter the time in seconds: ')
+
+        countdown(int(t))
+
+        print("")
+        print("Options")
+        print("1: Play Again")
+        print("2: Menu")
+        timer_menu = input("What do you want to do? Enter the number: ")
+
+        if timer_menu == "1":
+            timer1 = 0
+        elif timer_menu == "2":
+            timer1 = 1
+        else:
+            print("Error: Invalid Input")
+            print("Default Procedure: Exit to Menu")
+            timer1 = 1
+
 print("")
 print("Welcome to the menu, " + name_player + "!")
 
@@ -940,6 +983,7 @@ while menu != exit_num:
     print("12: Tic Tac Toe")
     print("13: OOB")
     print("14: Morse Code")
+    print("15: Timer")
     print(str(exit_num) + ": Exit")
     print("")
     menu = input("What would you like to do? Enter the number: ")
@@ -974,9 +1018,10 @@ while menu != exit_num:
         oob()
     elif menu == "14":
         morse_code()
+    elif menu == "15":
+        timer()
     elif menu == str(exit_num):
         exit()
         menu = exit_num
     else:
         error()
-        
