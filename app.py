@@ -2,7 +2,7 @@
 
 name_player = input("Enter Your Name: ")
 menu = 0
-exit_num = 16
+exit_num = 17
 
 
 def error():
@@ -963,6 +963,143 @@ def timer():
             print("Default Procedure: Exit to Menu")
             timer1 = 1
 
+def l2n():
+    l2n1 = 0
+    while l2n1 != 1:
+        def translate(s):
+            translation = ""
+            for letter in s:
+                if letter in "a":
+                    translation = translation + "1 "
+                elif letter in "b":
+                    translation = translation + "2 "
+                elif letter in "c":
+                    translation = translation + "3 "
+                elif letter in "d":
+                    translation = translation + "4 "
+                elif letter in "e":
+                    translation = translation + "5 "
+                elif letter in "f":
+                    translation = translation + "6 "
+                elif letter in "g":
+                    translation = translation + "7 "
+                elif letter in "h":
+                    translation = translation + "8 "
+                elif letter in "i":
+                    translation = translation + "9 "
+                elif letter in "j":
+                    translation = translation + "10 "
+                elif letter in "k":
+                    translation = translation + "11 "
+                elif letter in "l":
+                    translation = translation + "12 "
+                elif letter in "m":
+                    translation = translation + "13 "
+                elif letter in "n":
+                    translation = translation + "14 "
+                elif letter in "o":
+                    translation = translation + "15 "
+                elif letter in "p":
+                    translation = translation + "16 "
+                elif letter in "q":
+                    translation = translation + "17 "
+                elif letter in "r":
+                    translation = translation + "18 "
+                elif letter in "s":
+                    translation = translation + "19 "
+                elif letter in "t":
+                    translation = translation + "20 "
+                elif letter in "u":
+                    translation = translation + "21 "
+                elif letter in "v":
+                    translation = translation + "22 "
+                elif letter in "w":
+                    translation = translation + "23 "
+                elif letter in "x":
+                    translation = translation + "24 "
+                elif letter in "y":
+                    translation = translation + "25 "
+                elif letter in "z":
+                    translation = translation + "26 "
+                elif letter in " ":
+                    translation = translation + "  "
+                elif letter in "A":
+                    translation = translation + "1 "
+                elif letter in "B":
+                    translation = translation + "2 "
+                elif letter in "C":
+                    translation = translation + "3 "
+                elif letter in "D":
+                    translation = translation + "4 "
+                elif letter in "E":
+                    translation = translation + "5 "
+                elif letter in "F":
+                    translation = translation + "6 "
+                elif letter in "G":
+                    translation = translation + "7 "
+                elif letter in "H":
+                    translation = translation + "8 "
+                elif letter in "I":
+                    translation = translation + "9 "
+                elif letter in "J":
+                    translation = translation + "10 "
+                elif letter in "K":
+                    translation = translation + "11 "
+                elif letter in "L":
+                    translation = translation + "12 "
+                elif letter in "M":
+                    translation = translation + "13 "
+                elif letter in "N":
+                    translation = translation + "14 "
+                elif letter in "O":
+                    translation = translation + "15 "
+                elif letter in "P":
+                    translation = translation + "16 "
+                elif letter in "Q":
+                    translation = translation + "17 "
+                elif letter in "E":
+                    translation = translation + "18 "
+                elif letter in "S":
+                    translation = translation + "19 "
+                elif letter in "T":
+                    translation = translation + "20 "
+                elif letter in "U":
+                    translation = translation + "21 "
+                elif letter in "V":
+                    translation = translation + "22 "
+                elif letter in "W":
+                    translation = translation + "23 "
+                elif letter in "X":
+                    translation = translation + "24 "
+                elif letter in "Y":
+                    translation = translation + "25 "
+                elif letter in "Z":
+                    translation = translation + "26 "
+                else:
+                    translation = translation + letter
+            return translation
+
+        if __name__ == '__main__':
+            s = input("Enter a phrase: ")
+            result = translate(s)
+            print("")
+            print("Translation: " + result)
+
+        print("")
+        print("Options")
+        print("1: Play Again")
+        print("2: Menu")
+        l2n_menu = input("What do you want to do? Enter the number: ")
+
+        if l2n_menu == "1":
+            l2n1 = 0
+        elif l2n_menu == "2":
+            l2n1 = 1
+        else:
+            print("Error: Invalid Input")
+            print("Default Procedure: Exit to Menu")
+            l2n1 = 1
+
 print("")
 print("Welcome to the menu, " + name_player + "!")
 
@@ -984,6 +1121,7 @@ while menu != exit_num:
     print("13: OOB")
     print("14: Morse Code")
     print("15: Timer")
+    print("16: Letters to Numbers")
     print(str(exit_num) + ": Exit")
     print("")
     menu = input("What would you like to do? Enter the number: ")
@@ -1020,6 +1158,8 @@ while menu != exit_num:
         morse_code()
     elif menu == "15":
         timer()
+    elif menu == "16":
+        l2n()
     elif menu == str(exit_num):
         exit()
         menu = exit_num
