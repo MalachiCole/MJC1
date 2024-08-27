@@ -500,7 +500,7 @@ def cypher():
                     translation = translation + letter
             return translation
 
-        shift = input("How many times would you like to shift the cypher? (1-26): ")
+        shift = input("How many times would you like to shift the cypher? Enter the number: ")
 
         if __name__ == '__main__':
             print("")
