@@ -882,6 +882,7 @@ def timer():
 def l2n():
     l2n1 = 0
     while l2n1 != 1:
+        print("Welcome to the Letters to Numbers, " + name_player + "!")
         def translate(s):
             translation = ""
             for letter in s:
@@ -1019,7 +1020,8 @@ def l2n():
 def clock():
     clock1 = 0
     while clock1 != 1:
-
+        print("Welcome to the Digital Clock, " + name_player + "!")
+        print("A new Window has opened.")
         import tkinter as tk
         from time import strftime
 
@@ -1095,7 +1097,8 @@ def clock():
 def alarm():
     alarm1 = 0
     while alarm1 != 1:
-
+        print("Welcome to the Alarm Clock, " + name_player + "!")
+        print("A new Window has opened.")
         # Create Object
         root = Tk()
 
@@ -1109,7 +1112,8 @@ def alarm():
 
         def alarm():
             # Infinite Loop
-            while True:
+            alarm2 = 0
+            while alarm2 != 1:
                 # Set Alarm
                 set_alarm_time = f"{hour.get()}:{minute.get()}:{second.get()}"
 
@@ -1125,6 +1129,8 @@ def alarm():
                     print("Time to Wake up")
                     # Playing sound
                     winsound.PlaySound("sound.wav", winsound.SND_ASYNC)
+                    alarm2 = 1
+                    print("Please press the X in the ALARM CLOCK Window.")
 
         # Add Labels, Frame, Button, Optionmenus
         Label(root, text="Alarm Clock", font=("Helvetica 20 bold"), fg="red").pack(pady=10)
