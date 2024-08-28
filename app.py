@@ -2,7 +2,13 @@
 
 name_player = input("Enter Your Name: ")
 menu = 0
-exit_num = 17
+exit_num = 19
+# Import Required Library
+from tkinter import *
+import datetime
+import time
+import winsound
+from threading import *
 
 
 def error():
@@ -1010,6 +1016,182 @@ def l2n():
             print("Default Procedure: Exit to Menu")
             l2n1 = 1
 
+def clock():
+    clock1 = 0
+    while clock1 != 1:
+
+        import tkinter as tk
+        from time import strftime
+
+        def light_theme():
+            frame = tk.Frame(root, bg="white")
+            frame.place(relx=0.1, rely=0.1, relwidth=0.8, relheight=0.8)
+            lbl_1 = tk.Label(frame, font=('calibri', 40, 'bold'),
+                             background='White', foreground='black')
+            lbl_1.pack(anchor="s")
+
+            def time():
+                string = strftime('%I:%M:%S %p')
+                lbl_1.config(text=string)
+                lbl_1.after(1000, time)
+
+            time()
+
+        def dark_theme():
+            frame = tk.Frame(root, bg="#22478a")
+            frame.place(relx=0.1, rely=0.1, relwidth=0.8, relheight=0.8)
+            lbl_2 = tk.Label(frame, font=('calibri', 40, 'bold'),
+                             background='#22478a', foreground='black')
+            lbl_2.pack(anchor="s")
+
+            def time():
+                string = strftime('%I:%M:%S %p')
+                lbl_2.config(text=string)
+                lbl_2.after(1000, time)
+
+            time()
+
+        root = tk.Tk()
+        root.title("Digital-Clock")
+        canvas = tk.Canvas(root, height=140, width=400)
+        canvas.pack()
+
+        frame = tk.Frame(root, bg='#22478a')
+        frame.place(relx=0.1, rely=0.1, relwidth=0.8, relheight=0.8)
+        lbl = tk.Label(frame, font=('calibri', 40, 'bold'),
+                       background='#22478a', foreground='black')
+        lbl.pack(anchor="s")
+
+        def time():
+            string = strftime('%I:%M:%S %p')
+            lbl.config(text=string)
+            lbl.after(1000, time)
+
+        time()
+
+        menubar = tk.Menu(root)
+        theme_menu = tk.Menu(menubar, tearoff=0)
+        theme_menu.add_command(label="Light", command=light_theme)
+        theme_menu.add_command(label="Dark", command=dark_theme)
+        menubar.add_cascade(label="Theme", menu=theme_menu)
+        root.config(menu=menubar)
+        root.mainloop()
+
+        print("")
+        print("Options")
+        print("1: Play Again")
+        print("2: Menu")
+        clock_menu = input("What do you want to do? Enter the number: ")
+
+        if clock_menu == "1":
+            clock1 = 0
+        elif clock_menu == "2":
+            clock1 = 1
+        else:
+            print("Error: Invalid Input")
+            print("Default Procedure: Exit to Menu")
+            clock1 = 1
+
+def alarm():
+    alarm1 = 0
+    while alarm1 != 1:
+
+        # Create Object
+        root = Tk()
+
+        # Set geometry
+        root.geometry("400x200")
+
+        # Use Threading
+        def Threading():
+            t1 = Thread(target=alarm)
+            t1.start()
+
+        def alarm():
+            # Infinite Loop
+            while True:
+                # Set Alarm
+                set_alarm_time = f"{hour.get()}:{minute.get()}:{second.get()}"
+
+                # Wait for one seconds
+                time.sleep(1)
+
+                # Get current time
+                current_time = datetime.datetime.now().strftime("%H:%M:%S")
+                print(current_time, set_alarm_time)
+
+                # Check whether set alarm is equal to current time or not
+                if current_time == set_alarm_time:
+                    print("Time to Wake up")
+                    # Playing sound
+                    winsound.PlaySound("sound.wav", winsound.SND_ASYNC)
+
+        # Add Labels, Frame, Button, Optionmenus
+        Label(root, text="Alarm Clock", font=("Helvetica 20 bold"), fg="red").pack(pady=10)
+        Label(root, text="Set Time", font=("Helvetica 15 bold")).pack()
+
+        frame = Frame(root)
+        frame.pack()
+
+        hour = StringVar(root)
+        hours = ('00', '01', '02', '03', '04', '05', '06', '07',
+                 '08', '09', '10', '11', '12', '13', '14', '15',
+                 '16', '17', '18', '19', '20', '21', '22', '23', '24'
+                 )
+        hour.set(hours[0])
+
+        hrs = OptionMenu(frame, hour, *hours)
+        hrs.pack(side=LEFT)
+
+        minute = StringVar(root)
+        minutes = ('00', '01', '02', '03', '04', '05', '06', '07',
+                   '08', '09', '10', '11', '12', '13', '14', '15',
+                   '16', '17', '18', '19', '20', '21', '22', '23',
+                   '24', '25', '26', '27', '28', '29', '30', '31',
+                   '32', '33', '34', '35', '36', '37', '38', '39',
+                   '40', '41', '42', '43', '44', '45', '46', '47',
+                   '48', '49', '50', '51', '52', '53', '54', '55',
+                   '56', '57', '58', '59', '60')
+        minute.set(minutes[0])
+
+        mins = OptionMenu(frame, minute, *minutes)
+        mins.pack(side=LEFT)
+
+        second = StringVar(root)
+        seconds = ('00', '01', '02', '03', '04', '05', '06', '07',
+                   '08', '09', '10', '11', '12', '13', '14', '15',
+                   '16', '17', '18', '19', '20', '21', '22', '23',
+                   '24', '25', '26', '27', '28', '29', '30', '31',
+                   '32', '33', '34', '35', '36', '37', '38', '39',
+                   '40', '41', '42', '43', '44', '45', '46', '47',
+                   '48', '49', '50', '51', '52', '53', '54', '55',
+                   '56', '57', '58', '59', '60')
+        second.set(seconds[0])
+
+        secs = OptionMenu(frame, second, *seconds)
+        secs.pack(side=LEFT)
+
+        Button(root, text="Set Alarm", font=("Helvetica 15"), command=Threading).pack(pady=20)
+
+        # Execute Tkinter
+        root.mainloop()
+
+        print("")
+        print("Options")
+        print("1: Play Again")
+        print("2: Menu")
+        alarm_menu = input("What do you want to do? Enter the number: ")
+
+        if alarm_menu == "1":
+            alarm1 = 0
+        elif alarm_menu == "2":
+            alarm1 = 1
+        else:
+            print("Error: Invalid Input")
+            print("Default Procedure: Exit to Menu")
+            alarm1 = 1
+
+
 print("")
 print("Welcome to the menu, " + name_player + "!")
 
@@ -1032,6 +1214,8 @@ while menu != exit_num:
     print("14: Morse Code")
     print("15: Timer")
     print("16: Letters to Numbers")
+    print("17: Digital Clock")
+    print("18: Alarm Clock")
     print(str(exit_num) + ": Exit")
     print("")
     menu = input("What would you like to do? Enter the number: ")
@@ -1070,6 +1254,10 @@ while menu != exit_num:
         timer()
     elif menu == "16":
         l2n()
+    elif menu == "17":
+        clock()
+    elif menu == "18":
+        alarm()
     elif menu == str(exit_num):
         exit()
         menu = exit_num
