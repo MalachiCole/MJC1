@@ -2,7 +2,7 @@
 
 name_player = input("Enter Your Name: ")
 menu = 0
-exit_num = 19
+exit_num = 20
 # Import Required Library
 from tkinter import *
 import datetime
@@ -1222,6 +1222,7 @@ while menu != exit_num:
     print("16: Letters to Numbers")
     print("17: Digital Clock")
     print("18: Alarm Clock")
+    print("19: Tetris")
     print(str(exit_num) + ": Exit")
     print("")
     menu = input("What would you like to do? Enter the number: ")
@@ -1264,6 +1265,351 @@ while menu != exit_num:
         clock()
     elif menu == "18":
         alarm()
+    elif menu == "19":
+        tetris1 = 0
+        while tetris1 != 1:
+            import tkinter as tk
+            from tkinter import messagebox
+            import random
+            print("")
+            print("Welcome to Tetris, " + name_player + "!")
+            print("")
+
+
+            print("Options")
+            print("1: Easy")
+            print("2: Normal")
+            print("3: Hard")
+            print("4: Exit")
+            difficulty = input("What difficulty would you like? Enter the number: ")
+
+            if difficulty == "1":
+                width1 = 10
+                height1 = 35
+            elif difficulty == "2":
+                width1 = 15
+                height1 = 25
+            elif difficulty == "3":
+                width1 = 30
+                height1 = 15
+            elif difficulty == "4":
+                tetris1 = 1
+                width1 = 0
+                height1 = 0
+            else:
+                print("Error: Invalid Input")
+                print("Default Procedure: Exit to Menu")
+                tetris1 = 1
+                width1 = 0
+                height1 = 0
+            print("A new window has opened")
+
+            cell_size = 30
+            C = width1
+            R = height1
+            height = R * cell_size
+            width = C * cell_size
+
+            FPS = 200
+
+            SHAPES = {
+                "O": [(-1, -1), (0, -1), (-1, 0), (0, 0)],
+                "S": [(-1, 0), (0, 0), (0, -1), (1, -1)],
+                "T": [(-1, 0), (0, 0), (0, -1), (1, 0)],
+                "I": [(0, 1), (0, 0), (0, -1), (0, -2)],
+                "L": [(-1, 0), (0, 0), (-1, -1), (-1, -2)],
+                "J": [(-1, 0), (0, 0), (0, -1), (0, -2)],
+                "Z": [(-1, -1), (0, -1), (0, 0), (1, 0)],
+            }
+
+            SHAPESCOLOR = {
+                "O": "blue",
+                "S": "red",
+                "T": "yellow",
+                "I": "green",
+                "L": "purple",
+                "J": "orange",
+                "Z": "Cyan",
+            }
+
+
+            def draw_cell_by_cr(canvas, c, r, color="#CCCCCC", tag_kind=""):
+
+                x0 = c * cell_size
+                y0 = r * cell_size
+                x1 = c * cell_size + cell_size
+                y1 = r * cell_size + cell_size
+                if tag_kind == "falling":
+                    canvas.create_rectangle(x0, y0, x1, y1, fill=color, outline="white", width=2, tag=tag_kind)
+                elif tag_kind == "row":
+                    canvas.create_rectangle(x0, y0, x1, y1, fill=color, outline="white", width=2, tag="row-%s" % r)
+                else:
+                    canvas.create_rectangle(x0, y0, x1, y1, fill=color, outline="white", width=2)
+
+
+            def draw_board(canvas, block_list, isFirst=False):
+
+                for ri in range(R):
+                    canvas.delete("row-%s" % ri)
+
+                for ri in range(R):
+                    for ci in range(C):
+                        cell_type = block_list[ri][ci]
+                        if cell_type:
+                            draw_cell_by_cr(canvas, ci, ri, SHAPESCOLOR[cell_type], tag_kind="row")
+                        elif isFirst:
+                            draw_cell_by_cr(canvas, ci, ri)
+
+
+            def draw_cells(canvas, c, r, cell_list, color="#CCCCCC"):
+
+                for cell in cell_list:
+                    cell_c, cell_r = cell
+                    ci = cell_c + c
+                    ri = cell_r + r
+
+                    if 0 <= c < C and 0 <= r < R:
+                        draw_cell_by_cr(canvas, ci, ri, color, tag_kind="falling")
+
+
+            win = tk.Tk()
+            canvas = tk.Canvas(win, width=width, height=height, )
+            canvas.pack()
+
+            block_list = []
+            for i in range(R):
+                i_row = ['' for j in range(C)]
+                block_list.append(i_row)
+
+            draw_board(canvas, block_list, True)
+
+
+            def draw_block_move(canvas, block, direction=[0, 0]):
+
+                shape_type = block['kind']
+                c, r = block['cr']
+                cell_list = block['cell_list']
+
+                canvas.delete("falling")
+
+                dc, dr = direction
+                new_c, new_r = c + dc, r + dr
+                block['cr'] = [new_c, new_r]
+
+                draw_cells(canvas, new_c, new_r, cell_list, SHAPESCOLOR[shape_type])
+
+
+            def generate_new_block():
+
+                kind = random.choice(list(SHAPES.keys()))
+
+                cr = [C // 2, 0]
+                new_block = {
+                    'kind': kind,
+                    'cell_list': SHAPES[kind],
+                    'cr': cr
+                }
+
+                return new_block
+
+
+            def check_move(block, direction=[0, 0]):
+
+                cc, cr = block['cr']
+                cell_list = block['cell_list']
+
+                for cell in cell_list:
+                    cell_c, cell_r = cell
+                    c = cell_c + cc + direction[0]
+                    r = cell_r + cr + direction[1]
+
+                    if c < 0 or c >= C or r >= R:
+                        return False
+
+                    if r >= 0 and block_list[r][c]:
+                        return False
+
+                return True
+
+
+            def check_row_complete(row):
+                for cell in row:
+                    if cell == '':
+                        return False
+
+                return True
+
+
+            score = 0
+            win.title("SCORES: %s" % score)
+
+
+            def check_and_clear():
+                has_complete_row = False
+                for ri in range(len(block_list)):
+                    if check_row_complete(block_list[ri]):
+                        has_complete_row = True
+
+                        if ri > 0:
+                            for cur_ri in range(ri, 0, -1):
+                                block_list[cur_ri] = block_list[cur_ri - 1][:]
+                            block_list[0] = ['' for j in range(C)]
+                        else:
+                            block_list[ri] = ['' for j in range(C)]
+                        global score
+                        score += 10
+
+                if has_complete_row:
+                    draw_board(canvas, block_list)
+
+                    win.title("SCORES: %s" % score)
+
+
+            def save_block_to_list(block):
+
+                canvas.delete("falling")
+
+                shape_type = block['kind']
+                cc, cr = block['cr']
+                cell_list = block['cell_list']
+
+                for cell in cell_list:
+                    cell_c, cell_r = cell
+                    c = cell_c + cc
+                    r = cell_r + cr
+
+                    block_list[r][c] = shape_type
+
+                    draw_cell_by_cr(canvas, c, r, SHAPESCOLOR[shape_type], tag_kind="row")
+
+
+            def horizontal_move_block(event):
+
+                direction = [0, 0]
+                if event.keysym == 'Left':
+                    direction = [-1, 0]
+                elif event.keysym == 'Right':
+                    direction = [1, 0]
+                else:
+                    return
+
+                global current_block
+                if current_block is not None and check_move(current_block, direction):
+                    draw_block_move(canvas, current_block, direction)
+
+
+            def rotate_block(event):
+                global current_block
+                if current_block is None:
+                    return
+
+                cell_list = current_block['cell_list']
+                rotate_list = []
+                for cell in cell_list:
+                    cell_c, cell_r = cell
+                    rotate_cell = [cell_r, -cell_c]
+                    rotate_list.append(rotate_cell)
+
+                block_after_rotate = {
+                    'kind': current_block['kind'],
+                    'cell_list': rotate_list,
+                    'cr': current_block['cr']
+                }
+
+                if check_move(block_after_rotate):
+                    cc, cr = current_block['cr']
+                    draw_cells(canvas, cc, cr, current_block['cell_list'])
+                    draw_cells(canvas, cc, cr, rotate_list, SHAPESCOLOR[current_block['kind']])
+                    current_block = block_after_rotate
+
+
+            def land(event):
+                global current_block
+                if current_block is None:
+                    return
+
+                cell_list = current_block['cell_list']
+                cc, cr = current_block['cr']
+                min_height = R
+                for cell in cell_list:
+                    cell_c, cell_r = cell
+                    c, r = cell_c + cc, cell_r + cr
+                    if r >= 0 and block_list[r][c]:
+                        return
+                    h = 0
+                    for ri in range(r + 1, R):
+                        if block_list[ri][c]:
+                            break
+                        else:
+                            h += 1
+                    if h < min_height:
+                        min_height = h
+
+                down = [0, min_height]
+                if check_move(current_block, down):
+                    draw_block_move(canvas, current_block, down)
+
+
+
+            def game_loop():
+                win.update()
+                global current_block, to_float
+                if to_float:
+                    draw_board(canvas, block_list)
+                    to_float = False
+                elif current_block is None:
+                    new_block = generate_new_block()
+
+                    draw_block_move(canvas, new_block)
+                    current_block = new_block
+                    if not check_move(current_block, [0, 0]):
+                        messagebox.showinfo("Game Over!", "Your Score is %s" % score)
+                        win.destroy()
+                        return
+                else:
+                    if check_move(current_block, [0, 1]):
+                        draw_block_move(canvas, current_block, [0, 1])
+                    else:
+
+                        save_block_to_list(current_block)
+                        current_block = None
+                        check_and_clear()
+                        to_float = True
+
+                win.after(FPS, game_loop)
+
+
+            canvas.focus_set()
+            canvas.bind("<KeyPress-Left>", horizontal_move_block)
+            canvas.bind("<KeyPress-Right>", horizontal_move_block)
+            canvas.bind("<KeyPress-Up>", rotate_block)
+            canvas.bind("<KeyPress-Down>", land)
+
+            current_block = None
+            to_float = False
+
+            win.update()
+            win.after(FPS, game_loop)
+
+            win.mainloop()
+            print("Score:")
+            print(score)
+
+            print("")
+            print("Options")
+            print("1: Play Again")
+            print("2: Menu")
+            tetris_menu = input("What do you want to do? Enter the number: ")
+
+            if tetris_menu == "1":
+                tetris1 = 0
+            elif tetris_menu == "2":
+                tetris1 = 1
+            else:
+                print("Error: Invalid Input")
+                print("Default Procedure: Exit to Menu")
+                tetris1 = 1
+
     elif menu == str(exit_num):
         exit()
         menu = exit_num
