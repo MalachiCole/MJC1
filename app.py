@@ -1303,6 +1303,7 @@ while menu != exit_num:
                 width1 = 0
                 height1 = 0
             print("A new window has opened")
+            print("Press the 'X' in the upper right corner to stop playing.")
 
             cell_size = 30
             C = width1
