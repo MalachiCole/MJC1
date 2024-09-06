@@ -1,5 +1,4 @@
-# This is a comment
-
+# Trust me, this won't look like this when you run the app. It will look like "WELCOME". Just run it and see.
 print("\\‾‾‾\\  /‾\\  /‾‾‾/ |‾‾‾‾‾|  |‾〡      /‾‾☲|     /‾‾‾‾‾‾‾\\       /\\  /\\      〡‾‾‾‾‾|           ")
 print(" \\   \\/ _ \\/   /  | |‾‾‾   | 〡     /  /      / /‾‾‾‾‾\\ \\     /  \\/  \\      | |‾‾‾  ")
 print("  \\    / \\    /   | |=〡   〡 〡    |  |      | |      〡 |   /        \\     | |=〡 ")
