@@ -9,7 +9,7 @@ print("    \\/     \\/     L____|   L____|   \\____|    \\________/  /__/  \\_/ 
 
 name_player = input("Enter Your Name: ")
 menu = 0
-exit_num = 20
+exit_num = 21
 # Import Required Library
 from tkinter import *
 import datetime
@@ -1204,6 +1204,123 @@ def alarm():
             print("Default Procedure: Exit to Menu")
             alarm1 = 1
 
+def battleship():
+    battleship1 = 0
+    while battleship1 != 1:
+        print("")
+        print("Welcome to Battleship, " + name_player + "!")
+        print("You have 5 tries to sink my ship!")
+        print("")
+
+        from random import randint
+
+        # toggle of visible ship
+        a1 = False
+
+        board = []  # Initializing List board as empty list
+
+        for x in range(0, 5):  # Loop from 0-5 will work for 5 times
+            board.append(["O"] * 5)  # Make a Board(Matrix) of 5*5
+
+        def print_board(board):
+            for row in board:
+                print(" ".join(row))
+
+        print_board(board)
+
+        def random_row(board):
+            return randint(1, len(board))
+            # Generate a random value for  row
+
+        def random_col(board):
+            return randint(1, len(board))
+            # Generate a random value for col
+
+        ship_row = random_row(board)
+        # Store that random value in the Variable ship_row
+
+        ship_col = random_col(board)
+        # Store that random value in the Variable ship_col
+
+        ship_row1 = int(ship_row)
+        ship_col1 = int(ship_col)
+        if a1 == True:
+            print(ship_row)
+            # printing it to look at the random value.
+
+            print(ship_col)
+            # printing it to look at the random value.
+
+        # For Playing GAME just comment these above two lines of print
+
+        ship_row -= 1
+        ship_col -= 1
+
+        # Everything from here on should be in your for loop
+        # don't forget to properly indent!
+
+        for turn in range(5):
+            print("Turn", turn + 1)
+
+
+            print("Enter the coordinates you want your guess to be. The numbers must be between 1 and 5.")
+            # Guess the row as same as of ship_row(random value) to win the Battleship
+            guess_row = int(input("Guess Row: "))
+
+            # Guess the col as same as of ship_col(random value) to win the Battleship
+            guess_col = int(input("Guess Colum: "))
+
+            guess_row -= 1
+            guess_col -= 1
+
+            # Decresing by -1 both the values so as it is reflected in matrix
+
+            if guess_row == ship_row and guess_col == ship_col:
+                print("Congratulations! You sank my battleship!")
+                print("The ship was here:")
+                print("Row:")
+                print(ship_row1)
+                print("Colum:")
+                print(ship_col1)
+                break  # You win the game and it just came out of the loop
+
+            else:
+                if guess_row not in range(5) or \
+                        guess_col not in range(5):
+                    print("Oops, that's not even in the ocean.")
+
+                elif board[guess_row][guess_col] == "X":
+                    print("You guessed that one already.")
+
+                else:
+                    print("You missed my battleship!")
+                    board[guess_row][guess_col] = "X"
+
+                if (turn == 4):
+                    print("Game Over")
+                    print("The ship was here:")
+                    print("Row:")
+                    print(ship_row1)
+                    print("Colum:")
+                    print(ship_col1)
+                    break  # So that when game will over it just stop the print_board(board) function to again work
+                print_board(board)
+
+
+        print("")
+        print("Options")
+        print("1: Play Again")
+        print("2: Menu")
+        battleship_menu = input("What do you want to do? Enter the number: ")
+
+        if battleship_menu == "1":
+            battleship1 = 0
+        elif battleship_menu == "2":
+            battleship1 = 1
+        else:
+            print("Error: Invalid Input")
+            print("Default Procedure: Exit to Menu")
+            battleship1 = 1
 
 print("")
 print("Welcome to the menu, " + name_player + "!")
@@ -1230,6 +1347,7 @@ while menu != exit_num:
     print("17: Digital Clock")
     print("18: Alarm Clock")
     print("19: Tetris")
+    print("20: Battleship")
     print(str(exit_num) + ": Exit")
     print("")
     menu = input("What would you like to do? Enter the number: ")
@@ -1617,7 +1735,8 @@ while menu != exit_num:
                 print("Error: Invalid Input")
                 print("Default Procedure: Exit to Menu")
                 tetris1 = 1
-
+    elif menu == "20":
+        battleship()
     elif menu == str(exit_num):
         exit()
         menu = exit_num
