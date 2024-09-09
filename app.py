@@ -1268,7 +1268,7 @@ def battleship():
             guess_row = int(input("Guess Row: "))
 
             # Guess the col as same as of ship_col(random value) to win the Battleship
-            guess_col = int(input("Guess Colum: "))
+            guess_col = int(input("Guess Column: "))
 
             guess_row -= 1
             guess_col -= 1
@@ -1280,7 +1280,7 @@ def battleship():
                 print("The ship was here:")
                 print("Row:")
                 print(ship_row1)
-                print("Colum:")
+                print("Column:")
                 print(ship_col1)
                 break  # You win the game and it just came out of the loop
 
@@ -1301,7 +1301,7 @@ def battleship():
                     print("The ship was here:")
                     print("Row:")
                     print(ship_row1)
-                    print("Colum:")
+                    print("Column:")
                     print(ship_col1)
                     break  # So that when game will over it just stop the print_board(board) function to again work
                 print_board(board)
