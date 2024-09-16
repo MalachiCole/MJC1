@@ -9,8 +9,12 @@ print("    \\/     \\/     L____|   L____|   \\____|    \\________/  /__/  \\_/ 
 
 name_player = input("Enter Your Name: ")
 menu = 0
-exit_num = 21
+exit_num = 22
 # Import Required Library
+#!/usr/bin/python3
+# coding:utf-8
+from tkinter import *
+from random import *
 from tkinter import *
 import datetime
 import time
@@ -1440,7 +1444,249 @@ def battleship():
             print("Default Procedure: Exit to Menu")
             battleship1 = 1
 
+def twenty_forty_eight():
+    twenty_forty_eight1 = 0
+    while twenty_forty_eight1 != 1:
+        # lets developers test more instances for bugs
+        starting_num = 2
 
+        print("A new window has opened!.")
+        print("Press the 'X' in the upper right corner to stop playing.")
+
+        def new_game(n):
+            matrix = [[0] * n for i in range(n)]
+            return matrix
+
+        def game_state(mat):
+            for i in range(len(mat)):
+                for j in range(len(mat[0])):
+                    if mat[i][j] == 2048:
+                        return 'win'
+            for i in range(len(mat) - 1):
+                for j in range(len(mat[0]) - 1):
+                    if mat[i][j] == mat[i + 1][j] or mat[i][j + 1] == mat[i][j]:
+                        return 'not over'
+            for i in range(len(mat)):
+                for j in range(len(mat[0])):
+                    if mat[i][j] == 0:
+                        return 'not over'
+            for k in range(len(mat) - 1):
+                if mat[len(mat) - 1][k] == mat[len(mat) - 1][k + 1]:
+                    return 'not over'
+            for j in range(len(mat) - 1):
+                if mat[j][len(mat) - 1] == mat[j + 1][len(mat) - 1]:
+                    return 'not over'
+            return 'lose!'
+
+        def reverse(mat):
+            new = []
+            x = y = len(mat)
+            for i in range(x):
+                new.append([])
+                for j in range(y):
+                    new[i].append(mat[i][y - j - 1])
+            return new
+
+        def transpose(mat):
+            new = []
+            x = y = len(mat)
+            for i in range(y):
+                new.append([])
+                for j in range(x):
+                    new[i].append(mat[j][i])
+            return new
+
+        def cover_up(mat):
+            x = y = len(mat)
+            new = [x * [0] for i in range(y)]
+            done = False
+            for i in range(x):
+                count = 0
+                for j in range(y):
+                    if mat[i][j] != 0:
+                        new[i][count] = mat[i][j]
+                        if j != count:
+                            done = True
+                        count += 1
+            return (new, done)
+
+        def merge(mat):
+            done = False
+            x = y = len(mat)
+            for i in range(x):
+                for j in range(y - 1):
+                    if mat[i][j] == mat[i][j + 1] and mat[i][j] != 0:
+                        mat[i][j] *= 2
+                        mat[i][j + 1] = 0
+                        done = True
+            return (mat, done)
+
+        def up(game):
+            game = transpose(game)
+            game, done = cover_up(game)
+            temp = merge(game)
+            game = temp[0]
+            done = done or temp[1]
+            game = cover_up(game)[0]
+            game = transpose(game)
+            return (game, done)
+
+        def down(game):
+            game = reverse(transpose(game))
+            game, done = cover_up(game)
+            temp = merge(game)
+            game = temp[0]
+            done = done or temp[1]
+            game = cover_up(game)[0]
+            game = transpose(reverse(game))
+            return (game, done)
+
+        def left(game):
+            game, done = cover_up(game)
+            temp = merge(game)
+            game = temp[0]
+            done = done or temp[1]
+            game = cover_up(game)[0]
+            return (game, done)
+
+        def right(game):
+            game = reverse(game)
+            game, done = cover_up(game)
+            temp = merge(game)
+            game = temp[0]
+            done = done or temp[1]
+            game = cover_up(game)[0]
+            game = reverse(game)
+            return (game, done)
+
+        SIZE = 500
+        GRID_LEN = 4
+        GRID_PADDING = 10
+
+        BACKGROUND_COLOR_GAME = "#A020F0"
+        BACKGROUND_COLOR_CELL_EMPTY = "#ffc5f2"
+        BACKGROUND_COLOR_DICT = {2: "#4af6fe", 4: "#00ff13", 8: "#ff48f1", 16: "#f59563", \
+                                 32: "#00d703", 64: "#ff00f3", 128: "#ff9e00", 256: "#ff4d00", \
+                                 512: "#d60303", 1024: "#08ff00", 2048: "#ff0000"}
+        CELL_COLOR_DICT = {2: "#0083ff", 4: "#001fff", 8: "#8b00ff", 16: "#f9f6f2", \
+                           32: "#037518", 64: "#ffb0d3", 128: "#ffbffe", 256: "#ffe800", \
+                           512: "#fffc2c", 1024: "#efff7a", 2048: "#ffae00"}
+        BACKGROUND_COLOR_WIN = "#000000"
+        BACKGROUND_COLOR_2048 = "#ff0000"
+        TEXT_COLOR_2048 = "#ffae00"
+        TEXT_COLOR_WIN = "#FFFFFF"
+        FONT = ("Verdana", 40, "bold")
+
+        KEY_UP = "'w'"
+        KEY_DOWN = "'s'"
+        KEY_LEFT = "'a'"
+        KEY_RIGHT = "'d'"
+
+        class GameGrid(Frame):
+            def __init__(self):
+                Frame.__init__(self)
+
+                self.grid()
+                self.master.title('2048')
+                self.master.bind("<Key>", self.key_down)
+
+                self.commands = {KEY_UP: up, KEY_DOWN: down, KEY_LEFT: left, KEY_RIGHT: right}
+                self.grid_cells = []
+                self.init_grid()
+                self.init_matrix()
+                self.update_grid_cells()
+
+                self.mainloop()
+
+            def init_grid(self):
+                background = Frame(self, bg=BACKGROUND_COLOR_GAME, width=SIZE, height=SIZE)
+                background.grid()
+                for i in range(GRID_LEN):
+                    grid_row = []
+                    for j in range(GRID_LEN):
+                        cell = Frame(background, bg=BACKGROUND_COLOR_CELL_EMPTY, width=SIZE / GRID_LEN,
+                                     height=SIZE / GRID_LEN)
+                        cell.grid(row=i, column=j, padx=GRID_PADDING, pady=GRID_PADDING)
+                        t = Label(master=cell, text="", bg=BACKGROUND_COLOR_CELL_EMPTY, justify=CENTER, font=FONT,
+                                  width=4,
+                                  height=2)
+                        t.grid()
+                        grid_row.append(t)
+
+                    self.grid_cells.append(grid_row)
+
+            def gen(self):
+                return randint(0, GRID_LEN - 1)
+
+            def init_matrix(self):
+                self.matrix = new_game(4)
+                self.generate_next()
+                self.generate_next()
+
+            def update_grid_cells(self):
+                for i in range(GRID_LEN):
+                    for j in range(GRID_LEN):
+                        new_number = self.matrix[i][j]
+                        if new_number == 0:
+                            self.grid_cells[i][j].configure(text="", bg=BACKGROUND_COLOR_CELL_EMPTY)
+                        else:
+                            self.grid_cells[i][j].configure(text=str(new_number), bg=BACKGROUND_COLOR_DICT[new_number],
+                                                            fg=CELL_COLOR_DICT[new_number])
+                self.update_idletasks()
+
+            def key_down(self, event):
+                key = repr(event.char)
+                if key in self.commands:
+                    self.matrix, done = self.commands[key](self.matrix)
+                    if done:
+                        self.generate_next()
+                        self.update_grid_cells()
+                        done = False
+                        if game_state(self.matrix) == 'win':
+                            self.grid_cells[0][0].configure(text="", fg=TEXT_COLOR_WIN, bg=BACKGROUND_COLOR_WIN)
+                            self.grid_cells[0][1].configure(text="", fg=TEXT_COLOR_WIN, bg=BACKGROUND_COLOR_WIN)
+                            self.grid_cells[0][2].configure(text="", fg=TEXT_COLOR_WIN, bg=BACKGROUND_COLOR_WIN)
+                            self.grid_cells[0][3].configure(text="", fg=TEXT_COLOR_WIN, bg=BACKGROUND_COLOR_WIN)
+                            self.grid_cells[1][0].configure(text="", fg=TEXT_COLOR_WIN, bg=BACKGROUND_COLOR_WIN)
+                            self.grid_cells[1][1].configure(text="You", fg=TEXT_COLOR_WIN, bg=BACKGROUND_COLOR_WIN)
+                            self.grid_cells[1][2].configure(text="Win!", fg=TEXT_COLOR_WIN, bg=BACKGROUND_COLOR_WIN)
+                            self.grid_cells[1][3].configure(text="", fg=TEXT_COLOR_WIN, bg=BACKGROUND_COLOR_WIN)
+                            self.grid_cells[2][0].configure(text="", fg=TEXT_COLOR_WIN, bg=BACKGROUND_COLOR_WIN)
+                            self.grid_cells[2][1].configure(text="2048", fg=TEXT_COLOR_2048, bg=BACKGROUND_COLOR_2048)
+                            self.grid_cells[2][2].configure(text="2048", fg=TEXT_COLOR_2048, bg=BACKGROUND_COLOR_2048)
+                            self.grid_cells[2][3].configure(text="", fg=TEXT_COLOR_WIN, bg=BACKGROUND_COLOR_WIN)
+                            self.grid_cells[3][0].configure(text="", fg=TEXT_COLOR_WIN, bg=BACKGROUND_COLOR_WIN)
+                            self.grid_cells[3][1].configure(text="Close", fg=TEXT_COLOR_WIN, bg=BACKGROUND_COLOR_WIN)
+                            self.grid_cells[3][2].configure(text="Tab", fg=TEXT_COLOR_WIN, bg=BACKGROUND_COLOR_WIN)
+                            self.grid_cells[3][3].configure(text="", fg=TEXT_COLOR_WIN, bg=BACKGROUND_COLOR_WIN)
+                            print("Congradulations, " + name_player + ", YOU WIN!")
+                        if game_state(self.matrix) == 'lose':
+                            self.grid_cells[1][1].configure(text="You", bg=BACKGROUND_COLOR_CELL_EMPTY)
+                            self.grid_cells[1][2].configure(text="Lose!", bg=BACKGROUND_COLOR_CELL_EMPTY)
+
+            def generate_next(self):
+                index = (self.gen(), self.gen())
+                while self.matrix[index[0]][index[1]] != 0:
+                    index = (self.gen(), self.gen())
+                self.matrix[index[0]][index[1]] = starting_num
+
+        gamegrid = GameGrid()
+
+
+        print("")
+        print("Options")
+        print("1: Play Again")
+        print("2: Menu")
+        twenty_forty_eight_menu = input("What do you want to do? Enter the number: ")
+
+        if twenty_forty_eight_menu == "1":
+            twenty_forty_eight1 = 0
+        elif twenty_forty_eight_menu == "2":
+            twenty_forty_eight1 = 1
+        else:
+            print("Error: Invalid Input")
+            print("Default Procedure: Exit to Menu")
+            twenty_forty_eight1 = 1
 
 print("")
 print("Welcome to the menu, " + name_player + "!")
@@ -1468,6 +1714,7 @@ while menu != exit_num:
     print("18: Alarm Clock")
     print("19: Tetris")
     print("20: Battleship")
+    print("21: 2048")
     print(str(exit_num) + ": Exit")
     print("")
     menu = input("What would you like to do? Enter the number: ")
@@ -1857,6 +2104,8 @@ while menu != exit_num:
                 tetris1 = 1
     elif menu == "20":
         battleship()
+    elif menu == "21":
+        twenty_forty_eight()
     elif menu == str(exit_num):
         exit()
         menu = exit_num
