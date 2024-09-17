@@ -1563,6 +1563,7 @@ def twenty_forty_eight():
                             self.grid_cells[3][2].configure(text="Tab", fg=TEXT_COLOR_WIN, bg=BACKGROUND_COLOR_WIN)
                             self.grid_cells[3][3].configure(text="", fg=TEXT_COLOR_WIN, bg=BACKGROUND_COLOR_WIN)
                             print("Congradulations, " + name_player + ", YOU WIN!")
+                            print("ALERT: PLEASE CLOSE THE WINDOW.")
                         if game_state(self.matrix) == 'lose':
                             self.grid_cells[1][1].configure(text="You", bg=BACKGROUND_COLOR_CELL_EMPTY)
                             self.grid_cells[1][2].configure(text="Lose!", bg=BACKGROUND_COLOR_CELL_EMPTY)
@@ -1689,10 +1690,10 @@ def twenty_forty_eight():
 
         BACKGROUND_COLOR_GAME = "#A020F0"
         BACKGROUND_COLOR_CELL_EMPTY = "#ffc5f2"
-        BACKGROUND_COLOR_DICT = {2: "#4af6fe", 4: "#00ff13", 8: "#ff48f1", 16: "#f59563", \
+        BACKGROUND_COLOR_DICT = {2: "#4af6fe", 4: "#00ff13", 8: "#ff48f1", 16: "#ff8700", \
                                  32: "#00d703", 64: "#ff00f3", 128: "#ff9e00", 256: "#ff4d00", \
                                  512: "#d60303", 1024: "#08ff00", 2048: "#ff0000"}
-        CELL_COLOR_DICT = {2: "#0083ff", 4: "#001fff", 8: "#8b00ff", 16: "#f9f6f2", \
+        CELL_COLOR_DICT = {2: "#0083ff", 4: "#001fff", 8: "#8b00ff", 16: "#fbff00", \
                            32: "#037518", 64: "#ffb0d3", 128: "#ffbffe", 256: "#ffe800", \
                            512: "#fffc2c", 1024: "#efff7a", 2048: "#ffae00"}
         BACKGROUND_COLOR_WIN = "#000000"
