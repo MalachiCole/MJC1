@@ -1743,19 +1743,25 @@ def snake():
     print("3: Hard")
     print("4: Exit")
     snake_difficulty = input("What Difficulty would you like to play? Enter the number: ")
-    print("Controls: Up, Down, Left, Right.")
-    print("Eating an apple earns you 10 points.")
-    print("Please don't close the window until you have won. If you try, it will result in an error. We still haven't figures out why.")
     if snake_difficulty == "1":
         end_score = 50
+        print("Controls: Up, Down, Left, Right.")
+        print("Eating an apple earns you 10 points.")
+        print("Please don't close the window until you have won. If you try, it will result in an error. We still haven't figures out why.")
         print("Try to get to 50!")
         print("A new window has opened!")
     elif snake_difficulty == "2":
         end_score = 200
+        print("Controls: Up, Down, Left, Right.")
+        print("Eating an apple earns you 10 points.")
+        print("Please don't close the window until you have won. If you try, it will result in an error. We still haven't figures out why.")
         print("Try to get to 200!")
         print("A new window has opened!")
     elif snake_difficulty == "3":
         end_score = 500
+        print("Controls: Up, Down, Left, Right.")
+        print("Eating an apple earns you 10 points.")
+        print("Please don't close the window until you have won. If you try, it will result in an error. We still haven't figures out why.")
         print("Try to get to 500!")
         print("A new window has opened!")
     elif snake_difficulty == "4":
@@ -1955,7 +1961,7 @@ def snake():
         print("CONGRATUALATIONS! You Win, " + name_player + "!")
         print("We're sorry for the inconvenience, but due to a bug, we must exit the App.")
     else:
-        print("Exit App")
+        print()
 
 
 
@@ -2629,6 +2635,7 @@ while menu != exit_num:
 
     elif menu == "23":
         snake()
+        exit()
         menu = exit_num
     elif menu == str(exit_num):
         exit()
