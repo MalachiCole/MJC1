@@ -1732,6 +1732,9 @@ def twenty_forty_eight():
             twenty_forty_eight1 = 1
 
 def snake():
+
+    print("Welcome to Snake, " + name_player + "!")
+
     exit_message = 0
     end_score = 0
     print("Options:")
