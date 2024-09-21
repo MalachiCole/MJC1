@@ -9,10 +9,13 @@ print("    \\/     \\/     L____|   L____|   \\____|    \\________/  /__/  \\_/ 
 
 name_player = input("Enter Your Name: ")
 menu = 0
-exit_num = 23
+exit_num = 24
 # Import Required Library
 #!/usr/bin/python3
 # coding:utf-8
+import turtle
+import time
+import random
 from tkinter import *
 from random import *
 from tkinter import *
@@ -20,6 +23,7 @@ import datetime
 import time
 import winsound
 from threading import *
+import  random
 
 
 def error():
@@ -1727,6 +1731,231 @@ def twenty_forty_eight():
             print("Default Procedure: Exit to Menu")
             twenty_forty_eight1 = 1
 
+def snake():
+    exit_message = 0
+    end_score = 0
+    print("Options:")
+    print("1: Easy")
+    print("2: Normal")
+    print("3: Hard")
+    print("4: Exit")
+    snake_difficulty = input("What Difficulty would you like to play? Enter the number: ")
+    print("Controls: Up, Down, Left, Right.")
+    print("Eating an apple earns you 10 points.")
+    print("Please don't close the window until you have won. If you try, it will result in an error. We still haven't figures out why.")
+    if snake_difficulty == "1":
+        end_score = 50
+        print("Try to get to 50!")
+        print("A new window has opened!")
+    elif snake_difficulty == "2":
+        end_score = 200
+        print("Try to get to 200!")
+        print("A new window has opened!")
+    elif snake_difficulty == "3":
+        end_score = 500
+        print("Try to get to 500!")
+        print("A new window has opened!")
+    elif snake_difficulty == "4":
+        end_score = 0
+        exit_message = 1
+    else:
+        end_score = 0
+        print("Error: Invalid Input")
+        print("Default Procedure: Exit to Menu")
+        exit_message = 1
+
+    delay = 0.1
+
+    # Score
+    score=0
+    high_score=0
+
+    # set up the screen
+    wn=turtle.Screen()
+    wn.title("Snake Game by Mahesh Sawant")
+    wn.bgcolor("green")
+    wn.setup(width=600, height=600)
+    wn.tracer(0)
+
+    # Snake head
+    head=turtle.Turtle()
+    head.speed(0)
+    head.shape("square")
+    head.color("black")
+    head.penup()
+    head.goto(0,0)
+    head.direction="stop"
+
+    # Snake food
+    food=turtle.Turtle()
+    food.speed(0)
+    food.shape("circle")
+    food.color("red")
+    food.penup()
+    food.goto(0,100)
+
+    segments=[]
+
+    # Pen
+    pen=turtle.Turtle()
+    pen.speed(0)
+    pen.shape("square")
+    pen.color("white")
+    pen.penup()
+    pen.hideturtle()
+    pen.goto(0,260)
+    pen.write("Score: 0 High Score: 0", align="center", font=("Courier", 24, "normal"))
+
+    # Functions
+    def go_up():
+        if head.direction != "down":
+            head.direction="up"
+
+    def go_down():
+        if head.direction != "up":
+            head.direction="down"
+
+    def go_left():
+        if head.direction != "right":
+            head.direction="left"
+
+    def go_right():
+        if head.direction != "left":
+            head.direction="right"
+
+    def move():
+        if head.direction == "up":
+            y=head.ycor()
+            head.sety(y+20)
+
+        if head.direction == "down":
+            y=head.ycor()
+            head.sety(y-20)
+
+        if head.direction == "left":
+            x=head.xcor()
+            head.setx(x-20)
+
+        if head.direction == "right":
+            x=head.xcor()
+            head.setx(x+20)
+
+    # keyboard bindings
+    wn.listen()
+    wn.onkeypress(go_up,"Up")
+    wn.onkeypress(go_down,"Down")
+    wn.onkeypress(go_left,"Left")
+    wn.onkeypress(go_right,"Right")
+
+    # Main game loop
+    x = True
+    while x == True:
+        wn.update()
+
+        # Check for a collision with the border
+        if head.xcor()>290 or head.xcor()<-290 or head.ycor()>290 or head.ycor()<-290:
+            time.sleep(1)
+            head.goto(0,0)
+            head.direction="stop"
+
+            # Hide the segments
+            for segment in segments:
+                segment.goto(1000,1000)
+
+            # Clear the segments list
+            segments.clear()
+
+            # Reset the score
+            score=0
+
+            # Reset the delay
+            delay = 0.1
+
+            pen.clear()
+            pen.write("Score: {}  High Score: {}".format(score, high_score), align="center", font=("Courier", 24, "normal"))
+
+
+
+        #Check for a collision with the food
+
+        if head.distance(food)<20:
+            # move the food to a random spot
+            x=random.randint(-285,285)
+            y=random.randint(-285,285)
+            food.goto(x,y)
+
+            # Add a segment
+            new_segment=turtle.Turtle()
+            new_segment.speed(0)
+            new_segment.shape("square")
+            new_segment.color("grey")
+            new_segment.penup()
+            segments.append(new_segment)
+
+            # Shorten the delay
+            delay -= 0.001
+
+            # Increase the score
+            score+=10
+
+            if score > high_score:
+                high_score = score
+
+            pen.clear()
+            pen.write("Score: {}  High Score: {}".format(score,high_score),align="center",font=("Courier", 24, "normal"))
+
+        # Move the end segment first in reverse order
+        for index in range(len(segments)-1,0,-1):
+            x=segments[index-1].xcor()
+            y=segments[index-1].ycor()
+            segments[index].goto(x,y)
+
+        # Move segment 0 to where the head is
+        if len(segments)>0:
+            x=head.xcor()
+            y=head.ycor()
+            segments[0].goto(x,y)
+
+        move()
+
+        # Check for head collision with the body segments
+        for segment in segments:
+            if segment.distance(head)<20:
+                time.sleep(1)
+                head.goto(0,0)
+                head.direction="stop"
+
+                # Hide the segments
+                for segment in segments:
+                    segment.goto(1000,1000)
+
+                # Clear the segments list
+                segments.clear()
+
+                # Reset the score
+                score = 0
+
+                #Reset the delay
+                delay = 0.1
+
+                pen.clear()
+                pen.write("Score: {}  High Score: {}".format(score, high_score), align="center",font=("Courier", 24, "normal"))
+
+
+        time.sleep(delay)
+        if score == end_score:
+            x = False
+        else:
+            x = True
+
+    if exit_message == 0:
+        print("CONGRATUALATIONS! You Win, " + name_player + "!")
+        print("We're sorry for the inconvenience, but due to a bug, we must exit the App.")
+    else:
+        print("Exit App")
+
+
+
 print("")
 print("Welcome to the menu, " + name_player + "!")
 
@@ -1755,7 +1984,11 @@ while menu != exit_num:
     print("20: Battleship")
     print("21: 2048")
     print("22: Connect 4")
+    print("23: Snake")
     print(str(exit_num) + ": Exit")
+    print("")
+    print("WARNING: If you play snake, it will exit the app when you win.")
+    print("You can always just come back!")
     print("")
     menu = input("What would you like to do? Enter the number: ")
     print("")
@@ -2391,6 +2624,9 @@ while menu != exit_num:
                 connect41 = 1
 
 
+    elif menu == "23":
+        snake()
+        menu = exit_num
     elif menu == str(exit_num):
         exit()
         menu = exit_num
