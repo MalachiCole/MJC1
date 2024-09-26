@@ -9,7 +9,7 @@ print("    \\/     \\/     L____|   L____|   \\____|    \\________/  /__/  \\_/ 
 
 name_player = input("Enter Your Name: ")
 menu = 0
-exit_num = 25
+exit_num = 26
 # Import Required Library
 #!/usr/bin/python3
 # coding:utf-8
@@ -1964,6 +1964,147 @@ def snake():
     else:
         print()
 
+def hangman():
+    hangman1 = 0
+    while hangman1 != 1:
+        # Hangman ASCII art taken from http://inventwithpython.com/chapter9.html by Albert Sweigart
+        HANGMANPICS = ['''
+                  +---+
+                  |   |
+                      |
+                      |
+                      |
+                      |
+                =========''', '''
+                  +---+
+                  |   |
+                  O   |
+                      |
+                      |
+                      |
+                =========''', '''
+                  +---+
+                  |   |
+                  O   |
+                  |   |
+                      |
+                      |
+                =========''', '''
+                  +---+
+                  |   |
+                  O   |
+                 /|   |
+                      |
+                      |
+                =========''', '''
+                  +---+
+                  |   |
+                  O   |
+                 /|\\  |
+                      |
+                      |
+                =========''', '''
+                  +---+
+                  |   |
+                  O   |
+                 /|\\  |
+                   \\  |
+                      |
+                =========''', '''
+                  +---+
+                  |   |
+                  O   |
+                 /|\\  |
+                 / \\  |
+                      |
+                =========''']
+
+        # create a list of words to randomly choose from
+        wordList = "amongus plantsvszombies imposter enderdragon zombie creeper peashooter minecraft cattail crazydave steve alex crewmate sus skeld medbay pickaxe craftingtable villager".split()
+
+        def getWord(wordList):
+            # get a random number as the index in wordList
+            randIndex = random.randint(0, len(wordList) - 1)
+            return randIndex
+
+        def displayBoard(HANGMANPICS, word, failed_guesses, correct_guesses):
+            # display the current status of hangman and the word
+            print(HANGMANPICS[len(failed_guesses)])
+            hidden = '_ ' * len(word)
+            currentWord = word
+            for x in range(0,
+                           len(word)):  # if the current index letter is not in the correct_guesses list, replace with '_', to hide the letter
+                if word[x] not in correct_guesses:
+                    currentWord = currentWord.replace(word[x], '_ ')
+            print(currentWord)
+
+        print("Welcome to Hangman, " + name_player + "!")
+        print_words = input("Would you like to see the list of words? Enter Yes or No: ")
+        if print_words.lower() == "yes":
+            print(
+                "WORDS: amongus plantsvszombies imposter enderdragon zombie creeper peashooter minecraft cattail crazydave steve alex crewmate sus skeld medbay pickaxe craftingtable villager")
+        else:
+            print()
+        print(
+            "You have 8 guesses. Enter the letters you think might be in the word, or enter what you think might be the whole word.")
+        print("NOTE: ONLY ENTER LOWERCASE LETTERS!")
+        randIndex = getWord(wordList)
+        word = str(wordList[randIndex])
+        failed_guesses = ''
+        correct_guesses = ''
+        displayBoard(HANGMANPICS, word, failed_guesses, correct_guesses)
+        guess = ''
+        playAgain = ("yes")
+        hangman2 = 0
+        while hangman2 != 1:
+            guess = str(input("Enter your guess: "))
+            while (len(guess) != 1 or (
+                    guess.isalpha() == False)) and guess != word:  # if it's multiple letters or not a letter, ask again
+                guess = str(input(
+                    "You either entered an invalid character or incorrectly tried to guess the entire word. Enter a single letter or the word: "))
+            if guess == word:
+                print("Y O U  W I N!")
+                print("")
+                print("Options")
+                print("1: Play Again")
+                print("2: Menu")
+                hangman_menu = input("What do you want to do? Enter the number: ")
+                if hangman_menu == "1":
+                    hangman1 = 0
+                    hangman()
+                elif hangman_menu == "2":
+                    hangman2 = 1
+                    hangman1 = 1
+                else:
+                    print("Error: Invalid Input")
+                    print("Default Procedure: Exit to Menu")
+                    hangman2 = 1
+                    hangman1 = 1
+            if (len(failed_guesses) >= 5):
+                displayBoard(HANGMANPICS, word, failed_guesses, correct_guesses)
+                print("Y O U   L O S E!", " >>The correct word is", word)
+                print("")
+                print("Options")
+                print("1: Play Again")
+                print("2: Menu")
+                hangman_menu = input("What do you want to do? Enter the number: ")
+                if hangman_menu == "1":
+                    hangman1 = 0
+                    hangman()
+                elif hangman_menu == "2":
+                    hangman2 = 1
+                    hangman1 = 1
+                else:
+                    print("Error: Invalid Input")
+                    print("Default Procedure: Exit to Menu")
+                    hangman2 = 1
+                    hangman1 = 1
+            elif (guess in word):
+                correct_guesses += guess
+                displayBoard(HANGMANPICS, word, failed_guesses, correct_guesses)
+            else:
+                failed_guesses += guess
+                displayBoard(HANGMANPICS, word, failed_guesses, correct_guesses)
 
 
 print("")
@@ -1996,6 +2137,7 @@ while menu != exit_num:
     print("22: Connect 4")
     print("23: Snake")
     print("24: Sudoku")
+    print("25: Hangman")
     print(str(exit_num) + ": Exit")
     print("")
     print("WARNING: If you play snake, it will exit the app when you win.")
@@ -2933,7 +3075,8 @@ while menu != exit_num:
                 print("Error: Invalid Input")
                 print("Default Procedure: Exit to Menu")
                 sudoku1 = 1
-
+    elif menu == "25":
+        hangman()
     elif menu == str(exit_num):
         exit()
         menu = exit_num
