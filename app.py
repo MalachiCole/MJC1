@@ -2083,6 +2083,7 @@ def hangman():
             if (len(failed_guesses) >= 5):
                 displayBoard(HANGMANPICS, word, failed_guesses, correct_guesses)
                 print("Y O U   L O S E!", " >>The correct word is", word)
+                print(HANGMANPICS[6])
                 print("")
                 print("Options")
                 print("1: Play Again")
