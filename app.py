@@ -9,7 +9,7 @@ print("    \\/     \\/     L____|   L____|   \\____|    \\________/  /__/  \\_/ 
 amoogus = "ඞ"
 name_player = input("Enter Your Name: ")
 menu = 0
-exit_num = 28
+exit_num = 29
 from logging.config import RESET_ERROR
 from math import *
 import random
@@ -2145,6 +2145,7 @@ while menu != exit_num:
     print("25: Hangman")
     print("26: Factorial")
     print("27: GUI Calculator")
+    print("28: Rock Paper Scissors")
     print(str(exit_num) + ": Exit")
     print("")
     print("WARNING: If you play snake, it will exit the app when you win.")
@@ -4154,6 +4155,73 @@ while menu != exit_num:
                 print("Default Procedure: Exit to Menu")
                 GUIcalculator1 = 1
 
+    elif menu == "28":
+        rockpaperscissors = 0
+        while rockpaperscissors != 1:
+            dice = random.randint(1, 3)
+
+            user = input("Enter Rock, Paper, or Scissors: ")
+
+            if dice == 1:
+                bot = "Rock"
+                if user.lower() == "rock":
+                    win = 0
+                elif user.lower() == "paper":
+                    win = 1
+                elif user.lower() == "scissors":
+                    win = 2
+                else:
+                    win = 3
+            elif dice == 2:
+                bot = "Paper"
+                if user.lower() == "rock":
+                    win = 2
+                elif user.lower() == "paper":
+                    win = 0
+                elif user.lower() == "scissors":
+                    win = 1
+                else:
+                    win = 3
+            elif dice == 3:
+                bot = "Scissors"
+                if user.lower() == "rock":
+                    win = 1
+                elif user.lower() == "paper":
+                    win = 2
+                elif user.lower() == "scissors":
+                    win = 0
+                else:
+                    win = 3
+            else:
+                bot = "ERROR"
+
+            print("You chose: " + user)
+            print("Bot chose: " + bot)
+            if win == 1:
+                print("Contradulations, You Won!")
+            elif win == 2:
+                print("You Lose!")
+            elif win == 0:
+                print("Draw")
+            elif win == 4:
+                print("ERROR1")
+            else:
+                print("ERROR2")
+
+            print("")
+            print("Options")
+            print("1: Play Again")
+            print("2: Exit to Menu")
+            rockpaperscissors_menu = input("What do you want to do? Enter the number: ")
+
+            if rockpaperscissors_menu == "1":
+                rockpaperscissors = 0
+            elif rockpaperscissors_menu == "2":
+                rockpaperscissors = 1
+            else:
+                print("Error: Invalid Input")
+                print("Default Procedure: Exit to Menu")
+                rockpaperscissors = 1
     elif menu == str(exit_num):
         exit1()
         menu = exit_num
